@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/reset.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{../css/styles.css}">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
 <main class="auth" >
     <div class="auth__wrapper">
         <form class="auth__form" th:action="@{/app/auth}" method="post">
-            <img src="/templates/img/authLogo.svg" alt="ЦЭТ" class="auth__pic">
+            <img src="/img/authLogo.svg" alt="ЦЭТ" class="auth__pic">
             <h1 class="auth__title">Вход в личный кабинет</h1>
             <input type="text" name="username" id="username" placeholder="Электронная почта" class="auth__input">
             <input type="password" name="password" id="password" placeholder="Пароль" class="auth__input">

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/styles.css}">
 </head>
 <body>
     <header class="header">
@@ -14,7 +14,7 @@
            <div class="header__wrapper">
                 <div class="header__logo">
                     <a href="/" class="header__logo-link">
-                        <img src="../../../../../homeowners-spring/src/main/resources/templates/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
+                        <img src="/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
                     </a>
                 </div>
                 <nav class="header__nav">
