@@ -6,11 +6,12 @@ import com.example.homeownersspring.dto.UserCounterRequestDto;
 import com.example.homeownersspring.model.Counter;
 import com.example.homeownersspring.model.CounterType;
 import com.example.homeownersspring.model.User;
-import com.example.homeownersspring.service.UserServiceDao;
 import com.example.homeownersspring.service.impl.CounterService;
 import com.example.homeownersspring.service.impl.CounterTypeService;
+import com.example.homeownersspring.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,37 +24,39 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/app/")
 public class CounterController {
 
-    private final UserServiceDao userService;
+    private final UserService userService;
     private final CounterTypeService counterTypeService;
     private final CounterService counterService;
     private  CounterTypeDto counterTypeDto;
     private  CounterDto counterDto;
     @Autowired
-    public CounterController(UserServiceDao userService, CounterTypeService counterTypeService, CounterService counterService) {
+    public CounterController(UserService userService, CounterTypeService counterTypeService, CounterService counterService) {
         this.userService = userService;
         this.counterTypeService = counterTypeService;
         this.counterService = counterService;
     }
 
     @GetMapping(value = "counter_readings")
-    public String getCounters(Model model){
+    public String getCounters(@AuthenticationPrincipal User user, Model model){
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUsername(auth.getName());
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //User user = userService.findByUsername(auth.getName());
         UserCounterRequestDto userCounterRequestDto=UserCounterRequestDto.fromUser(user);
-
-        List<CounterDto> counterDtoList=user.getCounterList()
-                                            .stream()
-                                            .map(counterDto::fromCounter)
-                                            .collect(Collectors.toList());
-        List<CounterTypeDto> counterTypeDtoList = counterTypeService.getAll()
-                                                                    .stream()
-                                                                    .map(counterTypeDto::fromCounterType)
-                                                                    .collect(Collectors.toList());
-
+        if(user.getCounterList().size()!=0) {
+            List<CounterDto> counterDtoList = user.getCounterList()
+                                                  .stream()
+                                                  .map(counterDto::fromCounter)
+                                                  .collect(Collectors.toList());
+            model.addAttribute("counters",counterDtoList);
+        }
+        if(counterTypeService.getAll().size()!=0) {
+            List<CounterTypeDto> counterTypeDtoList = counterTypeService.getAll()
+                                                                        .stream()
+                                                                        .map(counterTypeDto::fromCounterType)
+                                                                        .collect(Collectors.toList());
+            model.addAttribute("counterTypes",counterTypeDtoList);
+        }
         model.addAttribute("user", userCounterRequestDto);
-        model.addAttribute("counters",counterDtoList);
-        model.addAttribute("counterTypes",counterTypeDtoList);
         return "counter";
     }
 

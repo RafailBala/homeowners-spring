@@ -3,7 +3,7 @@ package com.example.homeownersspring.config;
 
 import com.example.homeownersspring.model.Role;
 import com.example.homeownersspring.model.User;
-import com.example.homeownersspring.service.impl.UserService;
+import com.example.homeownersspring.service.UsrDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ import java.util.Collections;
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserService userService;
+    private UsrDetailService userService;
 
     private static final String ADMIN_ENDPOINT = "/app/admin/**";
     private static final String LOGIN_ENDPOINT = "/app/auth";

@@ -2,6 +2,8 @@ package com.example.homeownersspring.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -52,10 +54,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany(mappedBy="id_User", fetch= FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy="id_User")
     List<Request> requestList;
 
-    @OneToMany(mappedBy="id_User", fetch= FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy="id_User")
     List<Counter> counterList;
 
     public User() {
