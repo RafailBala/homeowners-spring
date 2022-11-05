@@ -3,12 +3,10 @@ package com.example.homeownersspring.service;
 
 import com.example.homeownersspring.dto.UserDto;
 import com.example.homeownersspring.model.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserServiceDao {
 
     User register(UserDto user);
 

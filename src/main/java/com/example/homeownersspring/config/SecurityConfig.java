@@ -66,12 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
 
     }
-   //@Override
-   //public void configure(WebSecurity web) {
-   //    web.ignoring().antMatchers(
-   //            "/css/**",
-   //            "/fonts/**",
-   //            "/img/**"
-   //    );
-   //}
+   @Override
+   public void configure(WebSecurity web) {
+       web.ignoring().antMatchers(
+               "/css/**",
+               "/fonts/**",
+               "/img/**"
+       );
+   }
 }

@@ -2,7 +2,7 @@ package com.example.homeownersspring.controller;
 
 import com.example.homeownersspring.dto.UserDto;
 import com.example.homeownersspring.model.User;
-import com.example.homeownersspring.service.UserService;
+import com.example.homeownersspring.service.UserServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "app/users/")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceDao userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceDao userService) {
         this.userService = userService;
     }
 

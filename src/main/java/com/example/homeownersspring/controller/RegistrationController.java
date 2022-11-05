@@ -2,7 +2,7 @@ package com.example.homeownersspring.controller;
 
 import com.example.homeownersspring.dto.UserDto;
 import com.example.homeownersspring.model.User;
-import com.example.homeownersspring.service.UserService;
+import com.example.homeownersspring.service.UserServiceDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +17,9 @@ import java.util.Map;
 @RequestMapping(value = "/app/")
 public class RegistrationController {
 
-    private final UserService userService;
+    private final UserServiceDao userService;
 
-    public RegistrationController(UserService userService) {
+    public RegistrationController(UserServiceDao userService) {
         this.userService = userService;
     }
 
