@@ -1,10 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href=""  th:href="@{/css/reset.css}">
+    <link rel="stylesheet" href="" th:href="@{/css/styles.css}">
 </head>
 <body>
+<header class="header">
+    <div class="wrapper">
+        <div class="header__wrapper">
+            <div class="header__logo">
+                <a href="/" class="header__logo-link">
+                    <img src="/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
+                </a>
+            </div>
+            <nav class="header__nav">
+                <ul class="header__list">
+                    <li class="header__item">
+                        <a href="#!" class="header__link">Начисления</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#!" class="header__link">Показания</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#!" class="header__link">Заявки</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#!" class="header__link">Услуги</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#!" class="header__link">Новости</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<main class="reg">
+    <div class="wrapper">
+        <h1 class="reg__title">
+            Подача показаний
+        </h1>
+        <div th:each="el : ${user}">
+            <div class="counter_address-group_">
+                <div class="reg__street_">
+                    <label for="street" class="reg__form-label-first-group_">Улица</label>
+                    <input type="text" name="street" class="reg__form-input-first-group" id="street"
+                           th:value="${el.street}" readonly>
+                </div>
+                <div class="reg__house_">
+                    <label for="house" class="reg__form-label-first-group_">Дом</label>
+                    <input type="text" name="house" class="reg__form-input-first-group" id="house"
+                           th:value="${el.house}" readonly>
+                </div>
+                <div class="reg__corps_">
+                    <label for="building" class="reg__form-label-first-group_">Корпус</label>
+                    <input type="text" name="building" class="reg__form-input-first-group" id="building"
+                           th:value="${el.building}" readonly>
+                </div>
+                <div class="reg__room_">
+                    <label for="apartment" class="reg__form-label-first-group_">Квартира</label>
+                    <input type="text" name="apartment" class="reg__form-input-first-group" id="apartment"
+                           th:value="${el.apartment}"  readonly>
+                </div>
+            </div>
+        </div>
+        <form th:action="@{/app/counter_readings}" method="post" >
+        <div class="counter_table-group">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <td class="cell">Тип</td>
+                    <td class="cell">Номер</td>
+                    <td>Предыдущие показания, куб. м</td>
+                    <td>Текущие показания, куб. м</td>
+                </tr>
+                </thead>
+                <tbody id="counterss">
+                <div th:each="el : ${counters}">
+                    <tr>
+                        <td><p th:text="${el.counterTypeName}"/></td>
+                        <td><p th:text="${el.number}"/></td>
+                        <td><p th:text="${el.counterReading}"/></td>
+                        <td>
+                            <input  type="number" placeholder="--" min="0" max="999999" style="width: 100px">
+                        </td>
+                    </tr>
+                </div>
+                </tbody>
+                </select>
+                <template id="counter-template">
+                    <tr>
+                        <td>
+                            <select class="form-control" id="typeId" name="typeId" style="width: 170px">
+                                <option value="">Выберите тип</option>
+                                <option th:each="el : ${counterTypes}"
+                                        th:value="${el.id}"
+                                        th:text="${el.name}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="--" style="width: 150px">
+                        </td>
+                        <td>--</td>
+                        <td>
+                            <input type="number" placeholder="--" min="0" max="999999" style="width: 100px">
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+            <button type="submit"class="counter_submit_send" >Подать</button>
+        </form>
+        <button class="counter_submit_add" id="addCounter">Добавить счетчик</button>
+    </div>
+</main>
 
+<script>
+    const counters = document.getElementById('counterss');
+    const counterTemplate = document.getElementById('counter-template');
+
+    const addCounterButton = document.getElementById('addCounter');
+
+    addCounterButton.addEventListener('click', () => {
+        const counter = counterTemplate.content.cloneNode(true);
+        counters.appendChild(counter);
+    });
+</script>
 </body>
+
 </html>

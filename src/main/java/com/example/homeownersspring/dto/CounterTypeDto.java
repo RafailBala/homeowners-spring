@@ -2,8 +2,10 @@ package com.example.homeownersspring.dto;
 
 import com.example.homeownersspring.model.CounterType;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 @Data
+@Service
 public class CounterTypeDto {
     private Long id;
     private String name;

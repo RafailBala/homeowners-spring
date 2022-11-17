@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CounterService {
+public class CounterService{
 
     @Autowired
     private CounterRepository counterRepository;
@@ -30,6 +30,9 @@ public class CounterService {
     }
 
     public void add(Counter counter){
+        counterRepository.save(counter);
+    }
+    public void save(Counter counter){
         counterRepository.save(counter);
     }
 }

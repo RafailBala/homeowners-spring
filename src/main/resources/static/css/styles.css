@@ -4,8 +4,8 @@
     font-style: normal;
     font-weight: 400;
     src: local(''),
-    url('../fonts/montserrat-v25-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/montserrat-v25-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* montserrat-500 - latin_cyrillic */
 @font-face {
@@ -13,8 +13,8 @@
     font-style: normal;
     font-weight: 500;
     src: local(''),
-    url('../fonts/montserrat-v25-latin_cyrillic-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/montserrat-v25-latin_cyrillic-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* montserrat-600 - latin_cyrillic */
 @font-face {
@@ -22,8 +22,8 @@
     font-style: normal;
     font-weight: 600;
     src: local(''),
-    url('../fonts/montserrat-v25-latin_cyrillic-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-    url('../fonts/montserrat-v25-latin_cyrillic-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('../../../../../../../Downloads/static/static/fonts/montserrat-v25-latin_cyrillic-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 html{
     box-sizing: border-box;
@@ -50,7 +50,7 @@ body{
     color: #212121;
 }
 .wrapper{
-    max-width: 1140px;
+    max-width: 1500px;
     margin: 0 auto;
 }
 .header__wrapper{
@@ -102,7 +102,22 @@ body{
     flex-wrap: wrap;
     margin-bottom: 48px;
 }
-.reg__second-group{
+.counter_address-group{
+    flex-grow: 0,5;
+     display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 48px;
+    width: 10px;
+   /* min-width: auto;
+  max-width: 250px;   */
+  padding: 16px;
+    
+}
+
+
+
+
+.counter_table-group{
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 48px;
@@ -116,18 +131,21 @@ body{
 }
 .reg__street, .reg__house, .reg__building {
     margin-bottom: 1rem;
-    margin-right: 40px;
+    margin-right: 20px;
+    /* flex-shrink: 3; */
+    
 }
 .reg__flat{
     margin-bottom: 1rem;
 }
 
 .reg__form-label-first-group, .reg__form-label-second-group{
-    display: block;
-    font-weight: 500;
+    /* display: block; */
+    /* font-weight: 500; */
     font-size: 16px;
     line-height: 24px;
     margin-bottom: 16px;
+    /* width: 20px; */
 }
 
 .reg__form-input-first-group{
@@ -158,7 +176,7 @@ body{
     box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
 }
 .reg__form-input-second-group{
-    width: 192px;
+    width: 560px;
     height: 48px;
     padding: 0.375rem 0.75rem;
     font-family: inherit;
@@ -188,7 +206,7 @@ body{
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.reg__submit{
+.reg__submit, .add_conter, .send_counter, .counter_submit_add, .counter_submit_send{
     padding: 16px 75px;
     font-weight: 500;
     font-size: 16px;
@@ -198,10 +216,42 @@ body{
     border: 0;
     border-radius: 4px;
 }
+.counter_submit_send{
+    padding: 16px 75px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    background: #004F9E;
+    border: 0;
+    border-radius: 4px;
+    float: right;
+     
+    
+
+}
+
 .reg__submit:hover, .reg__submit:focus, .reg__submit:active{
     background: #033c74;
 }
-
+.count__submit:hover, .count__submit:focus, .count__submit:active{
+    background: #033c74;
+}
+table {
+    outline: 1px solid rgb(255, 255, 255);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+table td {
+    /* border: 5px solid #004F9E; */
+    padding: 10px;
+}
+select { 
+    width: 140px;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+}
 /*
     Форма авторизации
 */
@@ -209,7 +259,7 @@ body{
     padding-top: 180px;
 }
 .auth__wrapper{
-    max-width: 380px;
+    max-width: 600px;
     margin: 0 auto;
 }
 .auth__form{
@@ -262,3 +312,94 @@ body{
     line-height: 24px;
     color: #004F9E;
 }
+table  {
+	border-collapse: collapse;
+    font-family: Tahoma, Geneva, sans-serif;
+    width: 100%;
+    text-align: left;
+    border-radius: 3px;
+    border: 1px solid #e2e2e2;
+    vertical-align: middle;
+    
+    padding: 50px;
+    /* width: px;
+    /* height: 130px; */
+    /* height: auto; */
+    /* width: auto; */
+   
+}
+table thead {
+	background-color: #e9edff;
+    border: 1px solid #e9edff;
+    
+}
+tbody tr:hover {background-color: #e4edfa;}
+
+table tbody td {
+	
+    border: 1px solid #e2e2e2;
+    
+}
+table tbody  {
+	
+    border: 1px solid #e2e2e2;
+    
+}
+.cell {
+    width: 200px;
+}
+
+
+
+/* table td {
+	padding: 15px;
+    
+
+} */
+/* table thead td {
+	background-color: #254f81;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+	border: 1px solid #000000;
+    
+}*/
+/* table tbody td {
+	color: #636363;
+	border: 1px solid #dddfe1;
+    
+
+}*/ 
+/* table tbody tr {
+	background-color: #f9fafb;
+    width: 100%;
+    
+}  */
+/* table tbody tr:nth-child(odd) {
+	background-color: #ffffff;
+} */ 
+
+.counter_address-group_{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 48px; 
+     width: 2ch;
+    
+ }
+ .reg__street_{
+     /* width: -webkit-min-content;  */
+     padding: 20px 20px 20px 0;
+} 
+.reg__house_{
+    /* width: -webkit-min-content; */
+    padding: 20px 20px 20px 0;
+}
+.reg__corps_{
+    /* width: -webkit-min-content; */
+    padding: 20px 20px 20px 0;
+}
+.reg__room_{
+    /* width: -webkit-min-content; */
+    padding: 20px 20px 20px 0;
+    width: 30px;
+} 

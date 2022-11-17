@@ -3,16 +3,12 @@ package com.example.homeownersspring.controller;
 import com.example.homeownersspring.dto.CounterDto;
 import com.example.homeownersspring.dto.CounterTypeDto;
 import com.example.homeownersspring.dto.UserCounterRequestDto;
-import com.example.homeownersspring.model.Counter;
-import com.example.homeownersspring.model.CounterType;
 import com.example.homeownersspring.model.User;
 import com.example.homeownersspring.service.impl.CounterService;
 import com.example.homeownersspring.service.impl.CounterTypeService;
 import com.example.homeownersspring.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +23,15 @@ public class CounterController {
     private final UserService userService;
     private final CounterTypeService counterTypeService;
     private final CounterService counterService;
-    private  CounterTypeDto counterTypeDto;
-    private  CounterDto counterDto;
+    private  final CounterTypeDto counterTypeDto;
+    private   final CounterDto counterDto;
     @Autowired
-    public CounterController(UserService userService, CounterTypeService counterTypeService, CounterService counterService) {
+    public CounterController(UserService userService, CounterTypeService counterTypeService, CounterService counterService, CounterTypeDto counterTypeDto, CounterDto counterDto) {
         this.userService = userService;
         this.counterTypeService = counterTypeService;
         this.counterService = counterService;
+        this.counterTypeDto = counterTypeDto;
+        this.counterDto = counterDto;
     }
 
     @GetMapping(value = "counter_readings")
@@ -60,27 +58,23 @@ public class CounterController {
         return "counter";
     }
 
-   //@PostMapping(value = "counter_readings")
-   //public String postCounterType(@RequestParam String nameCounterType){
-   //    counterTypeService.add(nameCounterType);
-   //    return "redirect:/add/counter_readings";
-   //}
     @PostMapping(value = "counter_readings")
-    public String postCounter(@RequestParam String nameCounterType,
-                              @RequestParam String number,
-                              @RequestParam int counterReading,
+    public String postCounter(
                               @RequestParam Long id_CounterType,
                               Model model){
-        if(nameCounterType==null) {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findByUsername(auth.getName());
-            CounterType counterType = counterTypeService.findById(id_CounterType);
-            Counter counter = new Counter(number, counterReading, user, counterType);
-            counterService.add(counter);
-        }
-        else {
-            counterTypeService.add(nameCounterType);
-        }
+
+           // List<Counter> counters = counterDtoList
+           //         .stream()
+           //         .map(counterDto::toCounter)
+           //         .collect(Collectors.toList());
+           // for(int i=0;i<counters.size();i++){
+           //     counterService.save(counters.get(i));
+           // }
+            //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            //User user = userService.findByUsername(auth.getName());
+            //CounterType counterType = counterTypeService.findById(id_CounterType);
+            //Counter counter = new Counter(number, counterReading, user, counterType);
+            //counterService.add(counter);
         return "redirect:/add/counter_readings";
     }
 }
