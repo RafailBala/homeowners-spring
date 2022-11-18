@@ -11,55 +11,65 @@ const submitButton = document.getElementById('submit');
 submitButton.addEventListener('click', async () => {
     let hasAlert = false;
 
-    const countersJSON = [];
+    const countersJSON = {};
+    countersJSON.readings = [];
+    countersJSON.counters = [];
     {
         const counterList = counters.querySelectorAll('tr');
-        let i = 0;
+        let rIdx = 0;
+        let cIdx = 0;
         for (const counter of counterList) {
-            countersJSON[i] = {};
             const id = Number(counter.getAttribute('name'));
             const counterReading = counter.querySelector('input[name="counterReading"]').value;
             if (id !== -1) {
-                countersJSON[i].id = id;
+                // readings
+                countersJSON.readings[rIdx] = {};
+                countersJSON.readings[rIdx].id = id;
+                if (counterReading === '') {
+                    countersJSON.readings.pop();
+                    continue;
+                }
+                countersJSON.readings[rIdx].counterReading = Number(counterReading);
+                rIdx++;
             }
             else {
+                // counters
+                countersJSON.counters[cIdx] = {};
                 {
                     const typeId = Number(counter.querySelector('select[name="typeId"]').value);
-                    console.log(typeId);
                     if (typeId === -1) {
                         hasAlert = true;
                         alert('Выберите тип счетчика');
-                        countersJSON.pop();
+                        countersJSON.counters.pop();
                         continue;
                     }
-                    countersJSON[i].typeId = typeId;
+                    countersJSON.counters[cIdx].typeId = typeId;
                 }
                 {
                     const number = counter.querySelector('input[name="number"]').value;
                     if (number === '') {
                         hasAlert = true;
                         alert('Введите номер счетчика');
-                        countersJSON.pop();
+                        countersJSON.counters.pop();
                         continue;
                     }
-                    countersJSON[i].number = number;
+                    countersJSON.counters[cIdx].number = number;
                 }
                 if (counterReading === '') {
                     hasAlert = true;
                     alert('Введите текущие показания для нового счетчика');
+                    countersJSON.counters.pop();
+                    continue;
                 }
+                countersJSON.counters[cIdx].counterReading = Number(counterReading);
+                cIdx++;
             }
-            if (counterReading === '') {
-                countersJSON.pop();
-                continue;
-            }
-            countersJSON[i].counterReading = Number(counterReading);
-            i++;
         }
     }
 
-    if (countersJSON.length === 0
-        | hasAlert) {
+    if ((countersJSON.readings.length === 0
+        && countersJSON.counters.length === 0)
+        || hasAlert) {
         if (!hasAlert) alert('Введите данные для подачи');
         return;
     }
