@@ -9,6 +9,7 @@ import com.example.homeownersspring.service.impl.CounterTypeService;
 import com.example.homeownersspring.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -38,29 +39,32 @@ public class CounterRestController {
 
     @PostMapping(value = "counter_readings")
     public ResponseEntity postCounter(@RequestBody CounterReadingDto counterReadingDto) {
+        try {
+            List<CounterPostDto> counterPostDtoList = counterReadingDto.getCounters();
+            List<ReadingPostDto> readingPostDtoList = counterReadingDto.getReadings();
 
-        List<CounterPostDto> counterPostDtoList = counterReadingDto.getCounters();
-        List<ReadingPostDto> readingPostDtoList = counterReadingDto.getReadings();
+            for (int i = 0; i < readingPostDtoList.size(); i++) {
+                Counter counter = counterService.findById(readingPostDtoList.get(i).getId());
+                counter.setCounterReading(readingPostDtoList.get(i).getCounterReading());
+                counterService.save(counter);
+            }
+            if (counterPostDtoList != null) {
+                for (int i = 0; i < counterPostDtoList.size(); i++) {
 
-        for (int i = 0; i < readingPostDtoList.size(); i++) {
-            Counter counter = counterService.findById(readingPostDtoList.get(i).getId());
-            counter.setCounterReading(readingPostDtoList.get(i).getCounterReading());
-            counterService.save(counter);
+                    String numb = counterPostDtoList.get(i).getNumber();
+                    int counterRdng = counterPostDtoList.get(i).getCounterReading();
+                    CounterType counterType = counterTypeService.findById(counterPostDtoList.get(i).getTypeId());
+                    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                    User user = userService.findByUsername(auth.getName());
+
+                    Counter counter = new Counter(numb, counterRdng, user, counterType);
+                    counterService.save(counter);
+                }
+            }
+            Map<Object, Object> response = new HashMap<>();
+            return ResponseEntity.ok(response);
+        } catch (Exception ex) {
+            return (ResponseEntity) ResponseEntity.badRequest();
         }
-
-        for (int i = 0; i < counterPostDtoList.size(); i++) {
-
-            String numb = counterPostDtoList.get(i).getNumber();
-            int counterRdng = counterPostDtoList.get(i).getCounterReading();
-            CounterType counterType = counterTypeService.findById(counterPostDtoList.get(i).getTypeId());
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.findByUsername(auth.getName());
-
-            Counter counter = new Counter(numb, counterRdng, user, counterType);
-            counterService.save(counter);
-        }
-
-        Map<Object, Object> response = new HashMap<>();
-        return ResponseEntity.ok(response);
     }
 }
