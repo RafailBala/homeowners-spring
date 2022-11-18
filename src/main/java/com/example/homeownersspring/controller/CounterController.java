@@ -57,24 +57,4 @@ public class CounterController {
         model.addAttribute("user", userCounterRequestDto);
         return "counter";
     }
-
-    @PostMapping(value = "counter_readings")
-    public String postCounter(
-                              @RequestParam Long id_CounterType,
-                              Model model){
-
-           // List<Counter> counters = counterDtoList
-           //         .stream()
-           //         .map(counterDto::toCounter)
-           //         .collect(Collectors.toList());
-           // for(int i=0;i<counters.size();i++){
-           //     counterService.save(counters.get(i));
-           // }
-            //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            //User user = userService.findByUsername(auth.getName());
-            //CounterType counterType = counterTypeService.findById(id_CounterType);
-            //Counter counter = new Counter(number, counterReading, user, counterType);
-            //counterService.add(counter);
-        return "redirect:/add/counter_readings";
-    }
 }
