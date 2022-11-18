@@ -8,7 +8,9 @@ import com.example.homeownersspring.service.impl.CounterService;
 import com.example.homeownersspring.service.impl.CounterTypeService;
 import com.example.homeownersspring.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +37,9 @@ public class CounterController {
     }
 
     @GetMapping(value = "counter_readings")
-    public String getCounters(@AuthenticationPrincipal User user, Model model){
-
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //User user = userService.findByUsername(auth.getName());
+    public String getCounters( Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByUsername(auth.getName());
         UserCounterRequestDto userCounterRequestDto=UserCounterRequestDto.fromUser(user);
         if(user.getCounterList().size()!=0) {
             List<CounterDto> counterDtoList = user.getCounterList()

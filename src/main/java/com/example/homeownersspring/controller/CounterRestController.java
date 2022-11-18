@@ -9,7 +9,6 @@ import com.example.homeownersspring.service.impl.CounterTypeService;
 import com.example.homeownersspring.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -25,16 +24,12 @@ public class CounterRestController {
     private final UserService userService;
     private final CounterTypeService counterTypeService;
     private final CounterService counterService;
-    private final CounterTypeDto counterTypeDto;
-    private final CounterDto counterDto;
 
     @Autowired
-    public CounterRestController(UserService userService, CounterTypeService counterTypeService, CounterService counterService, CounterTypeDto counterTypeDto, CounterDto counterDto) {
+    public CounterRestController(UserService userService, CounterTypeService counterTypeService, CounterService counterService) {
         this.userService = userService;
         this.counterTypeService = counterTypeService;
         this.counterService = counterService;
-        this.counterTypeDto = counterTypeDto;
-        this.counterDto = counterDto;
     }
 
     @PostMapping(value = "counter_readings")

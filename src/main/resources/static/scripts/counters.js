@@ -87,7 +87,8 @@ submitButton.addEventListener('click', async () => {
             body: JSON.stringify(countersJSON),
             cache: "no-store"
         });
-        if (response.status === 201) {
+        if (response.status === 200) {
+
             location.reload();
         }
         else{
