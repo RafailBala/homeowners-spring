@@ -104,7 +104,7 @@ body{
 }
 .reg__second-group{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-bottom: 48px;
 }
 .reg__surname, .reg__name {
@@ -123,15 +123,55 @@ body{
 }
 
 .reg__form-label-first-group, .reg__form-label-second-group{
-    display: block;
+    display: block; 
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     margin-bottom: 16px;
 }
-
+.reg__form-input-first-group_request{
+    width: 600px; 
+    text-align: left;
+    height: 200px;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+}
 .reg__form-input-first-group{
-    width: 352px;
+    width: auto; 
+    height: 48px;
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.reg__form-input-first-group_D{
+    width: 120px; 
+    height: 48px;
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.reg__form-input-first-group_K{
+    width: 300px; 
     height: 48px;
     padding: 0.375rem 0.75rem;
     font-family: inherit;

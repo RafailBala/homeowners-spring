@@ -99,7 +99,7 @@ body{
 }
 .reg__first-group{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-bottom: 48px;
 }
 .counter_address-group{
