@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="" th:href="@{/css/styles1.css}">
+</head>
+<body>
+    <header class="header">
+        <div class="wrapper">
+           <div class="header__wrapper">
+                <div class="header__logo">
+                    <a href="/" class="header__logo-link">
+                        <img src="/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
+                    </a>
+                </div>
+                <nav class="header__nav">
+                    <ul class="header__list">
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Начисления</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Показания</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Заявки</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Услуги</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Новости</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div> 
+    </header>
+    <main class="reg">
+        <div class="wrapper">
+            <h1 class="reg__title">
+                Регистрация
+            </h1>
+    <form  class="reg__form" th:action="@{/app/reg}" method="post">
+        <div class="reg__first-group">
+            <div class="reg__surname">
+                <label for="lastName" class="reg__form-label-first-group">Фамилия</label>
+                <input type="text"  name="lastName" required class="reg__form-input-first-group" id="lastName" placeholder="Введите фамилию" >
+            </div>
+            <div class="reg__name">
+                <label for="firstName" class="reg__form-label-first-group">Имя</label>
+                <input type="text" name="firstName" required class="reg__form-input-first-group" id="firstName" placeholder="Введите имя" >
+            </div>
+            <div class="reg__patronymic">
+                <label for="patronymic" class="reg__form-label-first-group">Отчество</label>
+                <input type="text" name="patronymic" required class="reg__form-input-first-group" id="patronymic" placeholder="Введите отчество" >
+            </div>
+        </div>     
+        <div class="reg__second-group">
+            <div class="reg__street">
+                <label for="street" class="reg__form-label-second-group">Улица</label>
+                <input type="text" name="street" required class="reg__form-input-second-group-street" id="street" placeholder="Название улицы" >
+            </div>
+            <div class="reg__house">
+                <label for="house" class="reg__form-label-second-group">Дом</label>
+                <input type="text" name="house" required class="reg__form-input-second-group" id="house" placeholder="Номер" >
+            </div>
+            <div class="reg__building">
+                <label for="building" class="reg__form-label-second-group">Корпус</label>
+                <input type="text" name="building" class="reg__form-input-second-group" id="building" placeholder="Номер" >
+            </div>
+            <div class="reg__flat">
+                <label for="apartment" class="reg__form-label-second-group">Квартира</label>
+                <input type="text" name="apartment" required class="reg__form-input-second-group" id="apartment" placeholder="Номер" >
+            </div>
+        </div>   
+        <div class="reg__first-group">
+            <div class="reg__mail">
+                <label for="username" class="reg__form-label-first-group">Электронная почта</label>
+                <input type="text" name="username" required class="reg__form-input-first-group" id="username" placeholder="Адрес почты" >
+            </div>
+        </div>  
+        <button type="submit" class="reg__submit">Зарегистрироваться</button>
+    </form>
+        </div>
+    </main>
+</body>
+</html>
