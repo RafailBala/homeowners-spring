@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Заявки</title>
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/styles1.css">
 </head>
@@ -42,10 +42,10 @@
     <main class="reg">
         <div class="wrapper">
             <h1 class="reg__title">
-                Регистрация
+                Заявки
             </h1>
     <form  class="reg__form" th:action="@{/app/reg}" method="post">
-        <div class="reg__first-group">
+        <div class="reg__second-group_R">
             <div class="reg__surname">
                 <label for="lastName" class="reg__form-label-first-group">Улица</label>
                 <input type="text"  required class="reg__form-input-first-group" id="lastName" value= "Ленинградская" disabled>
@@ -63,7 +63,7 @@
                 <input type="text" name="patronymic" required class="reg__form-input-first-group_D" id="patronymic"  disabled value= "29">
             </div>
         </div>     
-        <div class="reg__second-group">
+        <div class="reg__second-group_R">
             <div class="reg__street">
                 <label for="street" class="reg__form-label-second-group">Фамилия</label>
                 <input type="text" name="street" required class="reg__form-input-first-group" id="street" disabled value= "Ильин" >
@@ -77,7 +77,7 @@
                 <input type="text" name="building" class="reg__form-input-first-group" id="building" disabled value= "Валерьевич" >
             </div>
         </div>   
-        <div class="reg__second-group">
+        <div class="reg__second-group_R">
             <div class="reg__street">
                 <label for="street" class="reg__form-label-second-group">Телефон</label>
                 <input type="text" name="street" required class="reg__form-input-first-group_K" id="street" disabled value= "89277228021" >
@@ -89,17 +89,21 @@
         </div>  
         <div class="reg__first-group">
             <div class="reg__mail">
-                <label for="username" class="reg__form-label-first-group">Тема обращения</label>
-                <input type="text" name="username" required class="reg__form-input-first-group_K" id="username" placeholder="Укажите тему" >
+                <label for="username" class="reg__form-label-first-group">Обращение</label>
+                <input type="text" name="username" required class="reg__form-input-first-group_K" id="username" placeholder="Тема" >
             </div>
         </div> 
         <div class="reg__first-group_">
             <div class="reg__mail">
                 <label for="username" class="reg__form-label-first-group">Ваше сообщение</label>
-                <input type="text" name="username" required class="reg__form-input-first-group_request" id="username" placeholder="..." >
+                <input type="text" name="username" required class="reg__form-input-first-group_request" id="username" placeholder="Текст обращения" >
             </div>
         </div> 
-        <button type="submit" class="reg__submit">Зарегистрироваться</button>
+        <form>
+            <label for="fileUpload"></label>
+            <input type="file" id="fileUpload">
+          </form>
+        <button type="submit" class="reg__submit">Отправить</button>
     </form>
         </div>
     </main>

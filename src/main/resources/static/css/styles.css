@@ -53,6 +53,10 @@ body{
     max-width: 1500px;
     margin: 0 auto;
 }
+.wrapper_request{
+    max-width: 1500px;
+    margin: 0 auto;
+}
 .header__wrapper{
     display: flex;
     flex-wrap: wrap;
