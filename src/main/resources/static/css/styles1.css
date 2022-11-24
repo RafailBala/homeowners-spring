@@ -138,6 +138,7 @@ body{
     border: 1px solid #bdbdbd;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    padding: 15px 15px 200px 15px;
     
 }
 .reg__form-input-first-group{
