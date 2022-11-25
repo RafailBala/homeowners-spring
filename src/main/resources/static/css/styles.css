@@ -53,6 +53,10 @@ body{
     max-width: 1500px;
     margin: 0 auto;
 }
+.wrapper_request{
+    max-width: 1500px;
+    margin: 0 auto;
+}
 .header__wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -99,7 +103,7 @@ body{
 }
 .reg__first-group{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-bottom: 48px;
 }
 .counter_address-group{
