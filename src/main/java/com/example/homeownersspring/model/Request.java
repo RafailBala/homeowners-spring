@@ -24,14 +24,17 @@ public class Request {
     @Column(name = "file_address")
     private String fileAddress;
 
+    @Column(name = "status")
+    private int status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_User", referencedColumnName = "id")
     private User id_User;
 
     public Request() {
     }
-
-    public Request(String topic, String content, String fileAddress, User id_User) {
+    public Request(String topic, String content, String fileAddress, int status, User id_User) {
+        this.status=status;
         this.topic = topic;
         this.content = content;
         this.fileAddress = fileAddress;

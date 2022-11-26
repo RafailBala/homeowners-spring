@@ -107,6 +107,11 @@ body{
     flex-wrap: nowrap;
     margin-bottom: 48px;
 }
+.reg__second-group_R{
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
+}
 .reg__surname, .reg__name {
     margin-bottom: 1rem;
     margin-right: 40px;
@@ -139,6 +144,7 @@ body{
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     padding: 15px 15px 200px 15px;
+    margin-bottom: 40px;
     
 }
 .reg__form-input-first-group{
@@ -303,3 +309,19 @@ body{
     line-height: 24px;
     color: #004F9E;
 }
+.input__file-button-text {
+    line-height: 1;
+    margin-top: 1px;
+  }
+  input[type=file]::file-selector-button {
+    border: 2px solid #caecff;
+    padding: .2em .4em;
+    border-radius: .2em;
+    background-color: #c3eff7;
+    transition: 1s;
+    margin-bottom: 24px;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background-color: #81ecec;
+  }

@@ -1,0 +1,35 @@
+<div th:fragment="header">
+  <header class="header">
+    <div class="wrapper">
+      <div class="header__wrapper">
+        <div class="header__logo">
+          <a href="/" class="header__logo-link">
+            <img src="/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
+          </a>
+        </div>
+        <nav class="header__nav">
+          <ul class="header__list">
+            <li class="header__item">
+              <a href="#!" class="header__link">Начисления</a>
+            </li>
+            <li class="header__item">
+              <a href="/app/counter_readings" class="header__link">Показания</a>
+            </li>
+            <li class="header__item">
+              <a href="/app/requests" class="header__link">Заявки</a>
+            </li>
+            <li class="header__item">
+              <a href="#!" class="header__link">Услуги</a>
+            </li>
+            <li class="header__item">
+              <a href="#!" class="header__link">Новости</a>
+            </li>
+            <form th:action="@{/logout}" method="post">
+              <input type="submit" value="Выход"/>
+            </form>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+</div>
