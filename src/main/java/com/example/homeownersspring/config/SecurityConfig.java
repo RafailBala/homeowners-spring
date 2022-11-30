@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String ADMIN_ENDPOINT = "/app/admin/**";
     private static final String LOGIN_ENDPOINT = "/app/auth";
     private static final String REG_ENDPOINT = "/app/reg";
+    private static final String RESET_ENDPOINT = "/app/reset_password";
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -49,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", REG_ENDPOINT).permitAll()
+                .antMatchers("/app/reset_password").permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 .antMatchers("/resources/**").permitAll()
                 .anyRequest().authenticated()
