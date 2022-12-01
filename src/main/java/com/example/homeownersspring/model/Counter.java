@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +29,9 @@ public class Counter {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_CounterType", referencedColumnName = "id")
     private CounterType id_CounterType;
+
+    @OneToMany(mappedBy="id_Indication", fetch= FetchType.EAGER)
+    private List<Indication> indications;
 
     public Counter(){
     }
