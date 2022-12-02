@@ -5,97 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заявки</title>
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/styles1.css">
+    <link rel="stylesheet" href=""  th:href="@{/css/reset.css}">
+    <link rel="stylesheet" href="" th:href="@{/css/styles1.css}">
 </head>
 <body>
-    <header class="header">
-        <div class="wrapper">
-           <div class="header__wrapper">
-                <div class="header__logo">
-                    <a href="/" class="header__logo-link">
-                        <img src="/img/logo_h.svg" alt="ЦЭТ" class="header__logo-pic">
-                    </a>
-                </div>
-                <nav class="header__nav">
-                    <ul class="header__list">
-                        <li class="header__item">
-                            <a href="#!" class="header__link">Начисления</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#!" class="header__link">Показания</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#!" class="header__link">Заявки</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#!" class="header__link">Услуги</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#!" class="header__link">Новости</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div> 
-    </header>
+<header th:insert="blocks/header :: header"></header>
     <main class="reg">
         <div class="wrapper">
             <h1 class="reg__title">
                 Заявки
             </h1>
-    <form  class="reg__form" th:action="@{/app/reg}" method="post">
+    <form  enctype="multipart/form-data" class="reg__form" th:action="@{/app/requests}" method="post">
+        <div th:each="el : ${user}">
         <div class="reg__second-group_R">
             <div class="reg__surname">
-                <label for="lastName" class="reg__form-label-first-group">Улица</label>
-                <input type="text"  required class="reg__form-input-first-group" id="lastName" value= "Ленинградская" disabled>
+                <label for="street" class="reg__form-label-first-group">Улица</label>
+                <input type="text"  required class="reg__form-input-first-group" id="street" th:value="${el.street}" disabled>
             </div>
             <div class="reg__name">
-                <label for="firstName" class="reg__form-label-first-group">Дом</label>
-                <input type="text" name="firstName" required class="reg__form-input-first-group_D" id="firstName" disabled value= "20" >
+                <label for="house" class="reg__form-label-first-group">Дом</label>
+                <input type="text" name="house" required class="reg__form-input-first-group_D" id="house" th:value="${el.house}" disabled >
             </div>
             <div class="reg__name">
-                <label for="firstName" class="reg__form-label-first-group">Корпус</label>
-                <input type="text" name="firstName" required class="reg__form-input-first-group_D" id="firstName" disabled value= "2" >
+                <label for="building" class="reg__form-label-first-group">Корпус</label>
+                <input type="text" name="building" required class="reg__form-input-first-group_D" id="building"  th:value="${el.building}" disabled >
             </div>
             <div class="reg__patronymic">
-                <label for="patronymic" class="reg__form-label-first-group">Квартира</label>
-                <input type="text" name="patronymic" required class="reg__form-input-first-group_D" id="patronymic"  disabled value= "29">
+                <label for="apartment" class="reg__form-label-first-group">Квартира</label>
+                <input type="text" name="apartment" required class="reg__form-input-first-group_D" id="apartment" th:value="${el.apartment}"  disabled>
             </div>
         </div>     
         <div class="reg__second-group_R">
             <div class="reg__street">
-                <label for="street" class="reg__form-label-second-group">Фамилия</label>
-                <input type="text" name="street" required class="reg__form-input-first-group" id="street" disabled value= "Ильин" >
+                <label for="lastname" class="reg__form-label-second-group">Фамилия</label>
+                <input type="text" name="lastName" required class="reg__form-input-first-group" id="lastName" th:value="${el.lastName}" disabled >
             </div>
             <div class="reg__house">
-                <label for="house" class="reg__form-label-second-group">Имя</label>
-                <input type="text" name="house" required class="reg__form-input-first-group" id="house" disabled value= "Никита" >
+                <label for="firstname" class="reg__form-label-second-group">Имя</label>
+                <input type="text" name="firstname" required class="reg__form-input-first-group" id="firstname" th:value="${el.firstname}" disabled >
             </div>
             <div class="reg__building">
-                <label for="building" class="reg__form-label-second-group">Отчество</label>
-                <input type="text" name="building" class="reg__form-input-first-group" id="building" disabled value= "Валерьевич" >
+                <label for="patronymic" class="reg__form-label-second-group">Отчество</label>
+                <input type="text" name="patronymic" class="reg__form-input-first-group" id="patronymic" th:value="${el.patronymic}" disabled >
             </div>
         </div>   
         <div class="reg__second-group_R">
             <div class="reg__house">
-                <label for="house" class="reg__form-label-second-group">Почта</label>
-                <input type="text" name="house" required class="reg__form-input-first-group_K" id="house" disabled value= "nyv1969@gmail.com" >
+                <label for="username" class="reg__form-label-second-group">Почта</label>
+                <input type="text" name="username" required class="reg__form-input-first-group_K" id="username" th:value="${el.username}" disabled >
             </div>
         </div>  
         <div class="reg__first-group">
             <div class="reg__mail">
-                <label for="username" class="reg__form-label-first-group">Обращение</label>
-                <input type="text" name="username" required class="reg__form-input-first-group_K" id="username" placeholder="Тема" >
+                <label for="topic" class="reg__form-label-first-group">Обращение</label>
+                <input type="text" name="topic" required class="reg__form-input-first-group_K" id="topic" placeholder="Тема" >
             </div>
         </div> 
         <div class="reg__first-group_">
             <div class="reg__mail">
-                <label for="username" class="reg__form-label-first-group">Ваше сообщение</label>
-                <input type="text" name="username" required class="reg__form-input-first-group_request" id="username" placeholder="Текст обращения" >
+                <label for="textAppeal" class="reg__form-label-first-group">Ваше сообщение</label>
+                <input type="text" name="textAppeal" required class="reg__form-input-first-group_request" id="textAppeal" placeholder="Текст обращения" >
             </div>
-        </div> 
-        <form>
+        </div>
+
             <label for="fileUpload"></label>
             <input type="file" id="fileUpload">
           </form>
