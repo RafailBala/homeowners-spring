@@ -17,4 +17,6 @@ public interface UserServiceDao {
     User findById(Long id);
 
     void delete(Long id);
+
+    User passwordReset(String email);
 }

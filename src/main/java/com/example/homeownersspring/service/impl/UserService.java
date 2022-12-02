@@ -7,7 +7,6 @@ import com.example.homeownersspring.model.User;
 import com.example.homeownersspring.repo.UserRepository;
 import com.example.homeownersspring.service.MailSender;
 import com.example.homeownersspring.service.UserServiceDao;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -58,6 +57,23 @@ public class UserService implements UserServiceDao {
     }
 
     @Override
+    public User passwordReset(String username){
+        User user=userRepository.findByUsername(username);
+        String password = generateRandomPassword(5);
+
+        String message = String.format(
+                "Здравствуйте, %s! \n" +
+                        "Ваш пароль: %s.",
+                user.getFirstName(),
+                password
+        );
+        user.setPassword(password);
+        userRepository.save(user);
+        mailSender.send(user.getUsername(), "Password", message);
+        return user;
+    }
+
+    @Override
     public List<User> getAll() {
         List<User> result = userRepository.findAll();
         return result;
@@ -65,8 +81,7 @@ public class UserService implements UserServiceDao {
 
     @Override
     public User findByUsername(String username) {
-        User result = userRepository.findByUsername(username);
-        return result;
+        return userRepository.findByUsername(username);
     }
 
     @Override
