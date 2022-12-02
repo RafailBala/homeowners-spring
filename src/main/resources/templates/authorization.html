@@ -12,20 +12,68 @@
     <link rel="stylesheet" type="text/css" th:href="@{../css/styles1.css}">
 </head>
 <body>
+    <main class="auth" >
+        <div class="auth__wrapper">
+            <form class="auth__form" th:action="@{/app/auth}" method="post">
+                <img src="/img/authLogo.svg" alt="ЦЭТ" class="auth__pic">
+                <h1 class="auth__title">Вход в личный кабинет</h1>
+                <input type="email" name="username" id="username" placeholder="Электронная почта" class="auth__input">
+                <input type="password" name="password" id="password" placeholder="Пароль" class="auth__input">
+                <a id="reset_password" href="#!" class="auth__ref">Сбросить пароль</a>
+                <button class="auth__submit">Войти</button>
+                <a href="/app/reg" class="auth__ref">Зарегистрироваться</a>
+            </form>
+        </div>
+    </main>
 
+    <script>
+        // Ошибка авторизации
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        if (params.error !== null)
+        {
+            alert(`Электронная почта или пароль введены неверно`);
+        }
+        // Сброс пароля
+        const resetPasswordButton = document.getElementById('reset_password');
+        resetPasswordButton.addEventListener('click', async () => {
+            const requestJSON = {};
+            requestJSON.username = document.getElementById('username').value;
+            if (requestJSON.username === '') {
+                alert('Введите электронную почту');
+                return;
+            }
 
-<main class="auth" >
-    <div class="auth__wrapper">
-        <form class="auth__form" th:action="@{/app/auth}" method="post">
-            <img src="/img/authLogo.svg" alt="ЦЭТ" class="auth__pic">
-            <h1 class="auth__title">Вход в личный кабинет</h1>
-            <input type="text" name="username" id="username" placeholder="Электронная почта" class="auth__input">
-            <input type="password" name="password" id="password" placeholder="Пароль" class="auth__input">
-            <a href="#!" class="auth__ref">Сбросить пароль</a>
-            <button class="auth__submit">Войти</button>
-            <a href="/app/reg" class="auth__ref">Зарегистрироваться</a>
-        </form>
-    </div>
-</main>
+            let url = '/app/reset_password';
+            console.log(`PATCH ${url}`);
+
+            try {
+                const response = await fetch(url, {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestJSON),
+                    cache: "no-store"
+                });
+                const result = await response.json();
+                if (response.status === 200) {
+                    alert(result.message);
+                }
+                else if (response.status === 400) {
+                    alert(result.message);
+                }
+                else {
+                    console.log(JSON.stringify(result));
+                    alert(`${result.status} ${result.error}`);
+                }
+            } catch (error) {
+                console.error(error);
+                alert(error);
+            }
+        });
+    </script>
 </body>
 </html>
