@@ -1,5 +1,7 @@
 package com.example.homeownersspring.dto;
 
+import com.example.homeownersspring.model.Counter;
+import com.example.homeownersspring.model.CounterReading;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 

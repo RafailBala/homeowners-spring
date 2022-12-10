@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name="indication")
-public class Indication {
+@Table(name="counter_reading")
+public class CounterReading {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,15 @@ public class Indication {
     @Column(name = "value")
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_Indication", referencedColumnName = "id")
-    private Counter id_Indication;
+    @ManyToOne
+    @JoinColumn(name = "counter_id")
+    private Counter counter;
+
+    public CounterReading (Timestamp date, String value) {
+        this.date = date;
+        this.value = value;
+    }
+
+    public CounterReading() {
+    }
 }

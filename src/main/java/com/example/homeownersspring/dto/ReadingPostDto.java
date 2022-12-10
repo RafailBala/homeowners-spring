@@ -8,4 +8,5 @@ import lombok.Data;
 public class ReadingPostDto {
     private Long id;
     private int counterReading;
+
 }

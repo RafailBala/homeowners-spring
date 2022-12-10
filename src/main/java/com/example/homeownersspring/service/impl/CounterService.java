@@ -11,16 +11,12 @@ import java.util.List;
 
 @Service
 public class CounterService{
-
     @Autowired
     private CounterRepository counterRepository;
-
     public List<Counter> getAll() {
         List<Counter> result = counterRepository.findAll();
         return result;
     }
-
-
     public Counter findById(Long id) {
         Counter result = counterRepository.findById(id).orElse(null);
         if (result == null) {

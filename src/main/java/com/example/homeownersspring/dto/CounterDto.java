@@ -24,19 +24,11 @@ public class CounterDto {
         this.counterTypeService = counterTypeService;
     }
 
-    public Counter toCounter(CounterDto counterDto){
-        Counter counter=new Counter();
-        counter.setId(counterDto.getId());
-        counter.setNumber(counterDto.getNumber());
-        counterReading=newCounterReading;
-        counter.setCounterReading(counterDto.getCounterReading());
-        return counter;
-    }
     public CounterDto fromCounter(Counter counter){
         CounterDto counterDto=new CounterDto(counterTypeService);
         counterDto.setId(counter.getId());
         counterDto.setNumber(counter.getNumber());
-        counterDto.setCounterReading(counter.getCounterReading());
+        counterDto.setCounterReading(Integer.parseInt(String.valueOf(counter.getCounterReadings().get(counter.getCounterReadings().size() - 1).getValue())));
         counterDto.setId_User(counter.getId());
         CounterType counterType=counterTypeService.findById(counter.getId_CounterType().getId());
         counterDto.setCounterTypeName(counterType.getName());
