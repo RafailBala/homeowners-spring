@@ -15,8 +15,9 @@ public class CounterReadingDtoForHistory {
     private Timestamp date;
     private String value;
     private String counterType;
+    private String counterNumber;
 
     public static CounterReadingDtoForHistory fromCounterReading(String counterTypeName, CounterReading counterReading) {
-        return new CounterReadingDtoForHistory(counterReading.getDate(), counterReading.getValue(), counterTypeName);
+        return new CounterReadingDtoForHistory(counterReading.getDate(), counterReading.getValue(), counterTypeName, counterReading.getCounter().getNumber());
     }
 }
