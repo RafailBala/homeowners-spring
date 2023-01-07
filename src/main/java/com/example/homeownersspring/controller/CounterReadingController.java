@@ -11,20 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/app/history")
+@RequestMapping(value = "/app/history/")
 public class CounterReadingController {
 
     @Autowired
     private CounterReadingService counterReadingService;
 
-    @GetMapping
-    public String getAll(Model model) {
-        model.addAttribute("counterReadings", counterReadingService.getAll());
-        return "";
+    @GetMapping(value = "getAllCounters")
+    public List<CounterReadingDtoForHistory> getAll() {
+        return counterReadingService.getAll();
     }
-
-//    @GetMapping
-//    public List<CounterReadingDtoForHistory> getAll(Model model) {
-//        return counterReadingService.getAll();
-//    }
 }
