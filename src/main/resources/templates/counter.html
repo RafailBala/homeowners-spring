@@ -6,87 +6,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-    <link rel="stylesheet" href=""  th:href="@{/css/reset.css}">
+    <link rel="stylesheet" href="" th:href="@{/css/reset.css}">
     <link rel="stylesheet" href="" th:href="@{/css/styles.css}">
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-    <main class="reg">
-        <div class="wrapper">
-            <h1 class="reg__title">
-                Подача показаний
-            </h1>
-            <div th:each="el : ${user}">
-                <div class="counter_address-group_">
-                    <div class="reg__street_">
-                        <label for="street" class="reg__form-label-first-group_">Улица</label>
-                        <input type="text" name="street" class="reg__form-input-first-group" id="street"
-                               th:value="${el.street}" readonly>
-                    </div>
-                    <div class="reg__house_">
-                        <label for="house" class="reg__form-label-first-group_">Дом</label>
-                        <input type="text" name="house" class="reg__form-input-first-group" id="house" style="width: 100px"
-                               th:value="${el.house}" readonly>
-                    </div>
-                    <div class="reg__corps_">
-                        <label for="building" class="reg__form-label-first-group_">Корпус</label>
-                        <input type="text" name="building" class="reg__form-input-first-group" id="building" style="width: 100px"
-                               th:value="${el.building}" readonly>
-                    </div>
-                    <div class="reg__room_">
-                        <label for="apartment" class="reg__form-label-first-group_">Квартира</label>
-                        <input type="text" name="apartment" class="reg__form-input-first-group" id="apartment" style="width: 100px"
-                               th:value="${el.apartment}"  readonly>
-                    </div>
+<main class="reg">
+    <div class="wrapper">
+        <h1 class="reg__title">
+            Показания
+        </h1>
+        <ul style="white-space:nowrap">
+            <li style="display: inline; padding-right: 50px"><a href="#" id="submitHref" class="reg__title"
+                                                                style="font-size: 24px" onclick="submitStatement()">Подать
+                показания</a></li>
+            <li style="display: inline"><a href="#" id="historyHref" class="reg__title"
+                                           style="font-size: 24px; text-decoration: none" onclick="historyStatement()">История</a>
+            </li>
+        </ul>
+    </div>
+    <div class="wrapper" id="submitStatement" style="display: block">
+        <div th:each="el : ${user}">
+            <div class="counter_address-group_">
+                <div class="reg__street_">
+                    <label for="street" class="reg__form-label-first-group_">Улица</label>
+                    <input type="text" name="street" class="reg__form-input-first-group" id="street"
+                           th:value="${el.street}" readonly>
+                </div>
+                <div class="reg__house_">
+                    <label for="house" class="reg__form-label-first-group_">Дом</label>
+                    <input type="text" name="house" class="reg__form-input-first-group" id="house" style="width: 100px"
+                           th:value="${el.house}" readonly>
+                </div>
+                <div class="reg__corps_">
+                    <label for="building" class="reg__form-label-first-group_">Корпус</label>
+                    <input type="text" name="building" class="reg__form-input-first-group" id="building"
+                           style="width: 100px"
+                           th:value="${el.building}" readonly>
+                </div>
+                <div class="reg__room_">
+                    <label for="apartment" class="reg__form-label-first-group_">Квартира</label>
+                    <input type="text" name="apartment" class="reg__form-input-first-group" id="apartment"
+                           style="width: 100px"
+                           th:value="${el.apartment}" readonly>
                 </div>
             </div>
-            <div class="counter_table-group">
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <td class="cell">Тип</td>
-                            <td class="cell">Номер</td>
-                            <td>Предыдущие показания, куб. м</td>
-                            <td>Текущие показания, куб. м</td>
-                        </tr>
-                    </thead>
-                    <tbody id="counterss">
-                        <tr th:each="el : ${counters}" th:name="${el.id}">
-                            <td><p th:text="${el.counterTypeName}"/></td>
-                            <td><p th:text="${el.number}"/></td>
-                            <td><p th:text="${el.counterReading}"/></td>
-                            <td>
-                                <input name="counterReading" type="number" placeholder="--" th:min="${el.counterReading + 1}" max="999999" style="width: 100px">
-                            </td>
-                        </tr>
-                    </tbody>
-                    <template id="counter-template">
-                        <tr name="-1">
-                            <td>
-                                <select name="typeId" class="form-control" style="width: 170px">
-                                    <option value="-1" hidden>--</option>
-                                    <option th:each="el : ${counterTypes}"
-                                            th:value="${el.id}"
-                                            th:text="${el.name}"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <input name="number" type="text" placeholder="--" style="width: 150px">
-                            </td>
-                            <td>--</td>
-                            <td>
-                                <input name="counterReading" type="number" placeholder="--" min="0" max="999999" style="width: 100px">
-                            </td>
-                        </tr>
-                    </template>
-                </table>
-            </div>
-            <button id="addCounter" class="counter_submit_add" >Добавить счетчик</button>
-            <button id="submit" class="counter_submit_send" >Подать</button>
         </div>
-    </main>
+        <div class="counter_table-group">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <td class="cell">Тип</td>
+                    <td class="cell">Номер</td>
+                    <td>Предыдущие показания, куб. м</td>
+                    <td>Текущие показания, куб. м</td>
+                </tr>
+                </thead>
+                <tbody id="counterss">
+                <tr th:each="el : ${counters}" th:name="${el.id}">
+                    <td><p th:text="${el.counterTypeName}"/></td>
+                    <td><p th:text="${el.number}"/></td>
+                    <td><p th:text="${el.counterReading}"/></td>
+                    <td>
+                        <input name="counterReading" type="number" placeholder="--" th:min="${el.counterReading + 1}"
+                               max="999999" style="width: 100px">
+                    </td>
+                </tr>
+                </tbody>
+                <template id="counter-template">
+                    <tr name="-1">
+                        <td>
+                            <select name="typeId" class="form-control" style="width: 170px">
+                                <option value="-1" hidden>--</option>
+                                <option th:each="el : ${counterTypes}"
+                                        th:value="${el.id}"
+                                        th:text="${el.name}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <input name="number" type="text" placeholder="--" style="width: 150px">
+                        </td>
+                        <td>--</td>
+                        <td>
+                            <input name="counterReading" type="number" placeholder="--" min="0" max="999999"
+                                   style="width: 100px">
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+        <button id="addCounter" class="counter_submit_add">Добавить счетчик</button>
+        <button id="submit" class="counter_submit_send">Подать</button>
+    </div>
+    <div class="wrapper" id="historyStatement" style="display: none">
+        <div class="counter_table-group">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <td>Дата</td>
+                    <td>Тип</td>
+                    <td>Номер</td>
+                    <td>Показания, куб. м</td>
+                </tr>
+                </thead>
+                <tbody id="history"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
-    <script th:src="@{/scripts/counters.js}"></script>
+<script th:src="@{/scripts/counters.js}"></script>
 </body>
 
 </html>
